@@ -51,6 +51,7 @@ def comments_page(request):
 #单文章
 def article(request):
     title = 'Hola,Spain'
-    return render(request,'articles/spain.html',{'title':title})
+    content = '“如果你想要去西班牙度蜜月或者跟人私奔的话，龙达是最适合的地方，全部城市目之所及都是浪漫的风景……”选择龙达的原因只因为他是海明威口中的私奔之城。整个城市都在悬崖峭壁之上，小镇的老城区和新城区通过新桥连接起来。'
+    return render(request,'articles/spain.html',{'title':title,'content':content,'comment':'comments'})
 
 

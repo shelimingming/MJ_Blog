@@ -28,6 +28,7 @@ urlpatterns = [
     url('^albums/albums_page$',albums_page,name='albums_page'),
     url('^comments$',comments,name='comments'),
     url('^comments/comments_page$',comments_page,name='comments_page'),
+    url('^articles/comments$',comments_page,name='comments_page'),
 
 
 ]
