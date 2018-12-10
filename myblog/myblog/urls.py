@@ -19,6 +19,8 @@ from django.conf.urls import url
 from blog1.views import index,articles,albums,home,article,comments,articles_page,comments_page,albums_page
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+
     url('^$',index,name='index'),
     url('^home$',home,name='home'),
     url('^articles$',articles,name='articles'),
