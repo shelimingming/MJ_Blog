@@ -6,26 +6,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Jumboo's Blog</title>
+    <script>
+        function changePage(page) {
+            document.getElementById("frame").setAttribute("src",page)
+        }
+    </script>
 </head>
 <body>
 
     <header class = "navbar navbar-inverse" role="banner">
         <div class="navbar-brand" style="color:#ffff00">MJ'S BLOG</div>
         <ul class="nav navbar-nav">
-            <li role="presentation" class="active"><a href="/">个人主页</a></li></ul>
+            <li name="home" role="presentation" ><a href="/">个人主页</a></li></ul>
         <ul class="nav navbar-nav">
-            <li role="presentation"><a href="/articles">所有文章</a></li></ul>
+            <li role="presentation"><a href="articles">所有文章</a></li></ul>
         <ul class="nav navbar-nav">
-            <li role="presentation"><a href="/albums">相册</a></li></ul>
+            <li role="presentation"><a href="albums">相册</a></li></ul>
         <ul class="nav navbar-nav">
-            <li role="presentation"><a href="/comments">留言</a></li>
+            <li role="presentation"><a href="comments">留言</a></li>
         </ul>
         <ul class="nav navbar-nav" style="float: right;">
             <li role="presentation"><a href="/">登录</a></li>
         </ul>
-        <ul class="nav navbar-nav" style="float: right;">
-            <li role="presentation"><a href="/">注册</a></li>
-        </ul>
+{#        <ul class="nav navbar-nav" style="float: right;">#}
+{#            <li role="presentation"><a href="/">注册</a></li>#}
+{#        </ul>#}
 
         <form action="" class="navbar-form" style="float:right;">
 
@@ -37,12 +42,41 @@
             </form>
 
     </header>
-    <iframe   src="home" width="100%" height="1000px"   frameborder="0"  name="iframe名称"     scrolling="yes/no/auto">
-</iframe>
+{#    <iframe   src="home" width="100%" height="1000px"   frameborder="0"  name="iframe名称"     scrolling="yes/no/auto">#}
+{#</iframe>#}
+    <div class="container">
+    <div id="left-nav" style="width: 15%; float: left;"  >
 
+        <div class="navbar-brand" style="color:#2b669a;">个人信息</div>
+        <div id="info">
+
+            <img src="/static/images/tx.jpg" style="width: 150px; height: 150px">
+            <br>
+            <br>
+            <p>&nbsp;&nbsp;所在地：南京&nbsp;&nbsp;访问量：0</p>
+        </div>
+
+        <div id="type">
+            <div class="navbar-brand" style="color:#2b669a;">文章分类</div><br><br>
+            <ul class="nav nav-stacked">
+                <li role="presentation" class="active"><a>&nbsp;&nbsp;技术类</a></li>
+                <li role="presentation"><a>&nbsp;&nbsp;游记类</a></li>
+                <li role="presentation"><a >&nbsp;&nbsp;情感类</a></li>
+                <li role="presentation"><a>&nbsp;&nbsp;搞笑类</a></li>
+            </ul>
+        </div>
+        <div id="album">
+        <div class="navbar-brand" style="color:#2b669a;">相册</div>
+            <img src="/static/images/album1.jpg" style="width: 150px; height: 112px">
+    </div>
+    </div>
+       <iframe id="frame"  src={{ page }} width="85%" height="1000px"  frameborder="0"  name="iframe名称"   style="float:right">
+</iframe>
+    </div>
     </div>
 </body>
 
 <script src="static/js/bootstrap.min.js"></script>
+
 
 </html>
