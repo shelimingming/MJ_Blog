@@ -16,21 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from blog1.views import index,articles,albums,home,article,comments,articles_page,comments_page,albums_page
+from blog1.views import articles,albums,home,article,comments
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-
-    url('^$',index,name='index'),
+    #主页url配置
+    url('^$',home,name='index'),
     url('^home$',home,name='home'),
     url('^articles$',articles,name='articles'),
-    url('^articles/article$',article,name='articles_page'),
-    url('^articles/articles_page$',articles_page,name='articles_page'),
     url('^albums$',albums,name='albums'),
-    url('^albums/albums_page$',albums_page,name='albums_page'),
     url('^comments$',comments,name='comments'),
-    url('^comments/comments_page$',comments_page,name='comments_page'),
-    url('^articles/comments$',comments_page,name='comments_page'),
+
+    #二级子页面配置
+    url('^articles/article$',article,name='article'),
+
 
 
 ]
