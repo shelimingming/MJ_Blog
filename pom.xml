@@ -11,6 +11,7 @@
     <modules>
         <module>myway-discovery-eureka</module>
         <module>myway-blog</module>
+        <module>myway-RBAC</module>
     </modules>
 
 </project>
