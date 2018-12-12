@@ -1,6 +1,5 @@
 $(document).ready(function () {
     var $dialog = $("#div3");
-
     autoCenter($dialog);
 
     //自动居中对话框
@@ -19,12 +18,15 @@ $(document).ready(function () {
     login.onclick = function show() {
         $('#div3').show(100);
         hidebg.style.display = "block";
+        $('#body').attr("style","overflow: hidden");
+
+
     }
     close.onclick = function close() {
         $('#div3').hide(100);
         hidebg.style.display = "none";
+        $('#body').removeAttr("style");
     }
-
 
     //声明需要用到的变量
     var mx = 0, my = 0;      //鼠标x、y轴坐标（相对于left，top）
