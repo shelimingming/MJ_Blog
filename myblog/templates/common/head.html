@@ -8,7 +8,7 @@
     <title>MJ's Blog</title>
 
 </head>
-<body id ="body">
+<body id="body">
 <div id="hidebg"></div>
 
 <header class="navbar navbar-inverse" role="banner" style="background:#286090">
@@ -26,12 +26,22 @@
         <li role="presentation"><a href="comments">留言</a></li>
     </ul>
     {#    <img src="/static/images/tx.jpg" style="float:right;width: 30px; height: 30px;margin: 10px">#}
-    <ul class="nav navbar-nav" style="float: right;">
-        <li role="presentation"><a id="login">登录</a></li>
-    </ul>
-    <ul class="nav navbar-nav" style="float: right;">
-        <li role="presentation"><a>注册</a></li>
-    </ul>
+    {% if request.session.user %}
+        <ul class="nav navbar-nav" style="float: right;">
+            <li role="presentation"><a href="logout">退出</a></li>
+        </ul>
+        <ul class="nav navbar-nav" style="float: right;">
+            <li role="presentation"><a style="color: #ffff00">欢迎{{ request.session.user.acct }}</a></li>
+        </ul>
+    {% else %}
+        <ul class="nav navbar-nav" style="float: right;">
+            <li role="presentation"><a id="login">登录</a></li>
+        </ul>
+        <ul class="nav navbar-nav" style="float: right;">
+            <li role="presentation"><a>注册</a></li>
+        </ul>
+    {% endif %}
+
 
     <form action="" class="navbar-form" style="float:right;">
         <div class="form-group has-feedback">
@@ -82,13 +92,14 @@
         <div class="container" style="width: 80%">
             <p style="font-size: 20px;color:#2b669a;">用户账号登录</p><br>
             <div class="box_cont">
-                <form class="box_frm">
-                    <input style="width:100%;opacity:0.6;" type="text" placeholder="账号/手机/邮箱"/><br><br>
-                    <input style="width:100%;opacity:0.6;" type="text" placeholder="密码"/><br><br>
+                <form class="box_frm" action="login" method="post">
+                    {% csrf_token %}
+                    <input name="username" style="width:100%;opacity:0.6;" type="text" placeholder="账号/手机/邮箱"/><br><br>
+                    <input name="password" style="width:100%;opacity:0.6;" type="text" placeholder="密码"/><br><br>
                     <div class="checbox">
 
                         <label class="checkbox-inline">
-                            <input type="checkbox" style="margin-right: 4px">
+                            <input name="keep" type="checkbox" style="margin-right: 4px">
                             <small>下次自动登录
                                 &nbsp;&nbsp;&nbsp;
                                 <a href="register">立即注册</a></small>
