@@ -4,12 +4,29 @@
 <link rel="stylesheet" href="static/css/self.css"/>
 <link rel="icon" href="static/images/favicon.ico">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" content="user-scalable=0">
+    {#     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no"/>#}
     <title>MJ's Blog</title>
+    <style>
+
+        #hidebg {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            background-color: #000;
+            width: 100%; /*宽度设置为100%，这样才能使隐藏背景层覆盖原页面*/
+            height: 100%;
+            filter: alpha(opacity=60); /*设置透明度为60%*/
+            opacity: 0.6; /*非IE浏览器下设置透明度为60%*/
+            display: none;
+            z-Index: 2;
+        }
+    </style>
 </head>
 <body>
+<div id="hidebg"></div>
 
-<header class="navbar navbar-inverse" role="banner">
+<header class="navbar navbar-inverse" role="banner" style="background:#286090">
     <div class="navbar-brand" style="color:#ffff00">MJ'S BLOG</div>
     <ul class="nav navbar-nav">
         <li name="home" role="presentation"><a href="/">个人主页</a></li>
@@ -23,12 +40,12 @@
     <ul class="nav navbar-nav">
         <li role="presentation"><a href="comments">留言</a></li>
     </ul>
-{#    <img src="/static/images/tx.jpg" style="float:right;width: 30px; height: 30px;margin: 10px">#}
+    {#    <img src="/static/images/tx.jpg" style="float:right;width: 30px; height: 30px;margin: 10px">#}
     <ul class="nav navbar-nav" style="float: right;">
-        <li role="presentation"><a href="/">登录</a></li>
+        <li role="presentation"><a id="login">登录</a></li>
     </ul>
     <ul class="nav navbar-nav" style="float: right;">
-        <li role="presentation"><a href="/">注册</a></li>
+        <li role="presentation"><a>注册</a></li>
     </ul>
 
     <form action="" class="navbar-form" style="float:right;">
@@ -70,7 +87,38 @@
             <img src="/static/images/album1.jpg" style="width: 69px; height: 51px">
         </div>
     </div>
-    <div class="body-content" style="float:right;width:80%;">
+
+    <div name="div3" id="div3" hidden="true"
+         style="margin-left:  27%; margin-right: 27%; margin-top:6%;float: left;width:25%;position: absolute;z-index: 999;background-color: #c9def0 ;">
+
+        <a style="float: right;font-size:x-large;margin-right: 8px;margin-top: 8px" id="close" class="close">×</a>
+        {#        <div class="container" style="border:3px #9acfea solid ;">#}
+        <br>
+        <div class="container" style="width: 80%">
+            <p style="font-size: 20px;color:#2b669a;">用户账号登录</p><br>
+            <div class="box_cont">
+                <form class="box_frm">
+                    <input style="width:100%;opacity:0.6;" type="text" placeholder="账号/手机/邮箱"/><br><br>
+                    <input style="width:100%;opacity:0.6;" type="text" placeholder="密码"/><br><br>
+                    <div class="checbox">
+
+                        <label class="checkbox-inline">
+                            <input type="checkbox" style="margin-right: 4px">
+                            <small>下次自动登录
+                                &nbsp;&nbsp;&nbsp;
+                                <a href="register">立即注册</a></small>
+                        </label>
+                        <br><br>
+                    </div>
+
+                    <input style="width:100%;" type="submit" value="登录" class="btn btn-primary"><br><br>
+                </form>
+            </div>
+        </div>
+
+        {#        </div>#}
+    </div>
+    <div class="body-content" style="float:right;width:85%;">
         {% block body-content %}{% endblock %}     <!-- 使用blok来空出子页面需要填充的内容 -->
     </div>
 
@@ -79,6 +127,19 @@
 </body>
 
 <script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    var login = document.getElementById("login");
+    var close = document.getElementById("close");
+    var hidebg = document.getElementById("hidebg");
+    login.onclick = function show() {
+        $('#div3').show(100);
+        hidebg.style.display="block";
+    }
+    close.onclick = function close() {
+        $('#div3').hide(100);
+        hidebg.style.display="none";
+    }
 
-
+</script>
 </html>

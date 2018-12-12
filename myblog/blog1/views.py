@@ -37,3 +37,8 @@ def article(request):
     return render(request,'articles/article.html',{'title':title,'content':content})
 
 
+
+#登录
+def login(request):
+    return render(request,'login/login.html')
+

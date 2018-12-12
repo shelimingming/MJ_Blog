@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from blog1.views import articles,albums,home,article,comments
+from blog1.views import articles,albums,home,article,comments,login
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -27,6 +27,8 @@ urlpatterns = [
     url('^albums$',albums,name='albums'),
     url('^comments$',comments,name='comments'),
 
+    #d登录、注册
+    url('^login$',login,name='login'),
     #二级子页面配置
     url('^articles/article$',article,name='article'),
 
