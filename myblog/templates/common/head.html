@@ -6,21 +6,7 @@
 <head>
     <meta charset="UTF-8" content="user-scalable=0">
     <title>MJ's Blog</title>
-    <style>
-        {#隐藏层，跳出弹窗时不允许进行其他操作#}
-        #hidebg {
-            position: absolute;
-            left: 0px;
-            top: 0px;
-            background-color: #000;
-            width: 100%; /*宽度设置为100%，这样才能使隐藏背景层覆盖原页面*/
-            height: 100%;
-            filter: alpha(opacity=60); /*设置透明度为60%*/
-            opacity: 0.6; /*非IE浏览器下设置透明度为60%*/
-            display: none;
-            z-Index: 2;
-        }
-    </style>
+
 </head>
 <body>
 <div id="hidebg"></div>
@@ -87,8 +73,8 @@
         </div>
     </div>
 
-    <div name="div3" id="div3" hidden="true"
-         style="margin-left:  27%; margin-right: 27%; margin-top:6%;float: left;width:25%;position: absolute;z-index: 999;background-color: #c9def0 ;">
+    <div name="div3" id="div3" hidden="true" onmousedown="mouseDown()" onmouseup="mouseUp()" onmousemove="mouseMove()"
+         style="float: left;width:25%;position: absolute;z-index: 999;background-color: #c9def0 ;">
 
         <a style="float: right;font-size:x-large;margin-right: 8px;margin-top: 8px" id="close" class="close">×</a>
         {#        <div class="container" style="border:3px #9acfea solid ;">#}
@@ -127,18 +113,19 @@
 
 <script src="static/js/bootstrap.min.js"></script>
 <script src="static/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-    var login = document.getElementById("login");
-    var close = document.getElementById("close");
-    var hidebg = document.getElementById("hidebg");
-    login.onclick = function show() {
-        $('#div3').show(100);
-        hidebg.style.display="block";
-    }
-    close.onclick = function close() {
-        $('#div3').hide(100);
-        hidebg.style.display="none";
-    }
-
-</script>
+<script src="static/js/self.js"></script>
+{#<script type="text/javascript">#}
+{#    var login = document.getElementById("login");#}
+{#    var close = document.getElementById("close");#}
+{#    var hidebg = document.getElementById("hidebg");#}
+{#    login.onclick = function show() {#}
+{#        $('#div3').show(100);#}
+{#        hidebg.style.display="block";#}
+{#    }#}
+{#    close.onclick = function close() {#}
+{#        $('#div3').hide(100);#}
+{#        hidebg.style.display="none";#}
+{#    }#}
+{##}
+{#</script>#}
 </html>
