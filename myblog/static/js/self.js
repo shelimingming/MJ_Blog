@@ -15,18 +15,22 @@ $(document).ready(function () {
     var login = document.getElementById("login");
     var close = document.getElementById("close");
     var hidebg = document.getElementById("hidebg");
+
     login.onclick = function show() {
+
         $('#div3').show(100);
         hidebg.style.display = "block";
-        $('#body').attr("style","overflow: hidden");
-
+        $('#body').attr("style", "overflow: hidden");
 
     }
+
+
+
     close.onclick = function close() {
         $('#div3').hide(100);
         hidebg.style.display = "none";
         $('#body').removeAttr("style");
-    }
+    };
 
     //声明需要用到的变量
     var mx = 0, my = 0;      //鼠标x、y轴坐标（相对于left，top）
@@ -73,4 +77,6 @@ $(document).ready(function () {
     window.onresize = function () {
         autoCenter($dialog);
     };
+
+
 });
