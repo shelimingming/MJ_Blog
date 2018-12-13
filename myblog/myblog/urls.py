@@ -16,23 +16,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from blog1.views import articles,albums,home,article,comments,login,logout
+from blog1.views import articles, albums, home, article, comments, goToRegisterPage, register, login, logout
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    #主页url配置
-    url('^$',home,name='index'),
-    url('^home$',home,name='home'),
-    url('^articles$',articles,name='articles'),
-    url('^albums$',albums,name='albums'),
-    url('^comments$',comments,name='comments'),
+    # 主页url配置
+    url('^$', home, name='index'),
+    url('^home$', home, name='home'),
+    url('^articles$', articles, name='articles'),
+    url('^albums$', albums, name='albums'),
+    url('^comments$', comments, name='comments'),
 
-    #d登录、注册
-    url('^login$',login,name='login'),
-    url('^logout$',logout,name='logout'),
-    #二级子页面配置
-    url('^articles/article$',article,name='article'),
-
-
+    # 登录、注册
+    url('^goToRegisterPage$', goToRegisterPage, name='goToRegisterPage'),
+    url('^register$', register, name='register'),
+    url('^login$', login, name='login'),
+    url('^logout$', logout, name='logout'),
+    # 二级子页面配置
+    url('^articles/article$', article, name='article'),
 
 ]

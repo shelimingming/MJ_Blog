@@ -38,7 +38,7 @@
             <li role="presentation"><a id="login" href="#">登录</a></li>
         </ul>
         <ul class="nav navbar-nav" style="float: right;">
-            <li role="presentation"><a href="register">注册</a></li>
+            <li role="presentation"><a href="goToRegisterPage">注册</a></li>
         </ul>
     {% endif %}
 
@@ -95,14 +95,14 @@
                 <form class="box_frm" action="login" method="post">
                     {% csrf_token %}
                     <input name="username" style="width:100%;opacity:0.6;" type="text" placeholder="账号/手机/邮箱"/><br><br>
-                    <input name="password" style="width:100%;opacity:0.6;" type="text" placeholder="密码"/><br><br>
+                    <input name="password" style="width:100%;opacity:0.6;" type="password" placeholder="密码"/><br><br>
                     <div class="checbox">
 
                         <label class="checkbox-inline">
                             <input name="keep" type="checkbox" style="margin-right: 4px">
                             <small>下次自动登录
                                 &nbsp;&nbsp;&nbsp;
-                                <a href="register">立即注册</a></small>
+                                <a href="goToRegisterPage">立即注册</a></small>
                         </label>
                         <br><br>
                     </div>
