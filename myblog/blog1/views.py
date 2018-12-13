@@ -1,5 +1,5 @@
 # 视图层
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from blog1 import http
 
 
@@ -16,16 +16,19 @@ def home(request):
     # data = content['content']
     # time = content['createTime']
     # read_time = content['readTime']
+    request.session['url'] = request.path
     return render(request, 'home.html', {'top1': data, 'time': time, 'read_time': 5})
 
 
 # 所有文章页面
 def articles(request):
+    request.session['url'] = request.path
     return render(request, 'articles.html')
 
 
 # 相册页面
 def albums(request):
+    request.session['url'] = request.path
     return render(request, 'albums.html')
 
 
@@ -58,7 +61,7 @@ def comments(request):
         comment['floor'] = i
         comment['date'] = '2018-12-10'+'\t'+'15:11:32'
         comments.append(comment)
-
+    request.session['url'] = request.path
     return render(request, 'comments.html',{'comments':comments})
 
 
@@ -66,6 +69,7 @@ def comments(request):
 def article(request):
     title = 'Hola,Spain'
     content = '“如果你想要去西班牙度蜜月或者跟人私奔的话，龙达是最适合的地方，全部城市目之所及都是浪漫的风景……”选择龙达的原因只因为他是海明威口中的私奔之城。整个城市都在悬崖峭壁之上，小镇的老城区和新城区通过新桥连接起来。'
+    request.session['url'] = request.path
     return render(request, 'articles/article.html', {'title': title, 'content': content})
 
 
@@ -76,6 +80,8 @@ def login(request):
     password = concat.get('password')
     keep = concat.get('keep') # 下次是否自动登录
     print(username, password, keep)
+    pre_url = request.session.get('url')
+    print(pre_url)
 
     url = "http://47.105.163.206:8003/user/login?username=" + username + "&password=" + password;
     user = http.get(url)
@@ -92,13 +98,16 @@ def login(request):
             #关闭浏览器就会失效
             request.session.set_expiry(0)
 
-        return render(request, 'home.html')
+        return redirect(pre_url)
     else:
         print("用户名密码错误")
+
+        return redirect(pre_url)
 
 
 # 退出登录
 def logout(request):
     # request.session['user'] = None
+    pre_url = request.session.get('url')
     request.session.pop('user')
-    return render(request, 'home.html')
+    return redirect(pre_url)
