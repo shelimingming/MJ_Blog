@@ -54,7 +54,8 @@
 </header>
 
 <div class="container">
-    <div id="left-nav" style="width: 15%; float: left;">
+    <p id="login_stat" >{{ request.session.login_stat }}</p>
+    <div id="left-nav" style="width: 20%; float: left;">
 
         <div class="navbar-brand" style="color:#2b669a;">个人信息</div>
         <div id="info">
@@ -62,7 +63,8 @@
             <img src="/static/images/tx.jpg" style="width: 150px; height: 150px">
             <br>
             <br>
-            <p>&nbsp;&nbsp;所在地：南京&nbsp;&nbsp;访问量：0</p>
+            <p>&nbsp;&nbsp;所在地：南京</p>
+            <p>&nbsp;&nbsp;访问量：0</p>
         </div>
 
         <div id="type">
@@ -77,14 +79,18 @@
         </div>
         <div id="album">
             <div class="navbar-brand" style="color:#2b669a;">相册</div>
-            <img src="/static/images/album1.jpg" style="width: 150px; height: 112px"><br><br>
-            <img src="/static/images/album1.jpg" style="width: 69px; height: 51px">&nbsp;&nbsp;
-            <img src="/static/images/album1.jpg" style="width: 69px; height: 51px">
+            {#            <img src="/static/images/album1.jpg" style="width: 150px; height: 112px"><br><br>#}
+            {#            <img src="/static/images/album1.jpg" style="width: 69px; height: 51px">&nbsp;&nbsp;#}
+            {#            <img src="/static/images/album1.jpg" style="width: 69px; height: 51px">#}
         </div>
     </div>
 
-    <div name="div3" id="div3" hidden="true" onmousedown="mouseDown()" onmouseup="mouseUp()" onmousemove="mouseMove()"
-         style="float: left;width:25%;position: absolute;z-index: 999;background-color: #c9def0 ;">
+    <div class="body-content container" style="float:left;width:77%;">
+        {% block body-content %}{% endblock %}     <!-- 使用blok来空出子页面需要填充的内容 -->
+    </div>
+
+    <div name="div3" id="div3" hidden="true"
+         style="width:25%;position: absolute;z-index: 999;background-color: #c9def0 ;left:37%">
 
         <a style="float: right;font-size:x-large;margin-right: 8px;margin-top: 8px" id="close" class="close">×</a>
         {#        <div class="container" style="border:3px #9acfea solid ;">#}
@@ -103,6 +109,13 @@
                             <small>下次自动登录
                                 &nbsp;&nbsp;&nbsp;
                                 <a href="goToRegisterPage">立即注册</a></small>
+                            <br>
+                            {% if request.session.login_stat == '0' %}
+                                <small>用户名密码错误</small>
+                            {% elif request.session.login_stat == '-1' %}
+                                <small>服务器连接超时</small>
+                            {% endif %}
+
                         </label>
                         <br><br>
                     </div>
@@ -113,9 +126,7 @@
         </div>
         {#        </div>#}
     </div>
-    <div class="body-content" style="float:right;width:85%;">
-        {% block body-content %}{% endblock %}     <!-- 使用blok来空出子页面需要填充的内容 -->
-    </div>
+
 
 </div>
 
@@ -124,6 +135,32 @@
 <script src="static/js/bootstrap.min.js"></script>
 <script src="static/js/jquery-3.3.1.min.js"></script>
 <script src="static/js/self.js"></script>
+<script>
+
+    function showLogin() {
+        var login_stat = $('#login_stat').text();
+        alert(login_stat);
+        if ((login_stat == '-1') | (login_stat == '0')) {
+            document.getElementById("login_stat").innerText = '1';
+            $('#div3').show(100);
+            hidebg.style.display = "block";
+            $('#body').attr("style", "overflow: hidden");
+            {#('#login_stat').text('1');#}
+        }
+    };
+    showLogin();
+    var close = document.getElementById("close");
+    close.onclick = function close() {
+        $('#div3').hide(100);
+        hidebg.style.display = "none";
+        $('#body').removeAttr("style");
+
+        {#$('#login_stat').text('1');#}
+
+    };
+
+
+</script>
 
 {% block js %}
 {% endblock %}

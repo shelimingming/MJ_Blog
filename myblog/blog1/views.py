@@ -1,10 +1,11 @@
 # 视图层
 from django.shortcuts import render, redirect
-from blog1 import http
+from blog1 import http as hp
 
 
 # 主页
 def home(request):
+
     data = '“如果你想要去西班牙度蜜月或者跟人私奔的话，龙达是最适合的地方，全部城市目之所及都是浪漫的风景……”'
     time = '2018-9-08 12:00:12'
     # REST接口
@@ -15,6 +16,7 @@ def home(request):
     # time = content['createTime']
     # read_time = content['readTime']
     request.session['url'] = request.path
+    # request.session['login_stat'] = '1'
     return render(request, 'home.html', {'top1': data, 'time': time, 'read_time': 5})
 
 
@@ -48,8 +50,9 @@ def comments(request):
             comments.append(comment)
             floor += 1
             print('comment')
-        else:
-            request.session['message'] = message.strip()
+            #前端处理
+        # else:
+        #     request.session['message'] = message.strip()
 
     # 从数据库中读取评论数据
     for i in range(floor, floor + 3):
@@ -91,41 +94,48 @@ def register(request):
 
     # 发送http post请求
     url = "http://47.105.163.206:8003/user/register"
-    http.post(url, body)
+    hp.post(url, body)
     pre_url = request.session.get('url')
     return redirect(pre_url)
 
 
 # 登录
 def login(request):
-    concat = request.POST
-    username = concat.get('username')
-    password = concat.get('password')
-    keep = concat.get('keep')  # 下次是否自动登录
-    print(username, password, keep)
-    pre_url = request.session.get('url')
-    print(pre_url)
-
-    url = "http://47.105.163.206:8003/user/login?username=" + username + "&password=" + password;
-    user = http.get(url)
-    # print(user)
-    if (user):
-        print("登录成功")
-        request.session['user'] = user
-
-        # 如果keep不为None，设置seesion
-        if keep:
-            # 一个月后失效，以秒为单位
-            request.session.set_expiry(60 * 60 * 24 * 30)
-        else:
-            # 关闭浏览器就会失效
-            request.session.set_expiry(0)
-
+    try:
+        # request.session['login_stat'] = None
+        concat = request.POST
+        username = concat.get('username')
+        password = concat.get('password')
+        keep = concat.get('keep')  # 下次是否自动登录
+        print(username, password, keep)
+        pre_url = request.session.get('url')
+        if username and password:
+            url = "http://47.105.163.206:8003/user/login?username=" + username + "&password=" + password
+            user = hp.get(url)
+            print(user)
+            if (user):
+                print("登录成功")
+                request.session['user'] = user
+                # 如果keep不为None，设置seesion
+                if keep:
+                    # 一个月后失效，以秒为单位
+                    request.session.set_expiry(60 * 60 * 24 * 30)
+                else:
+                    # 关闭浏览器就会失效
+                    request.session.set_expiry(0)
+                request.session['login_stat'] = '1'
+            else:
+                request.session['login_stat'] = '0'
+                print("用户名密码错误")
+        # else:
+        #         #     print("用户名密码不能为空")
+        #         #     request.session['login_stat'] = -1
         return redirect(pre_url)
-    else:
-        print("用户名密码错误")
-
+    except:
+        request.session['login_stat'] = '-1'
+        print("连接异常")
         return redirect(pre_url)
+
 
 
 # 退出登录
@@ -133,4 +143,5 @@ def logout(request):
     # request.session['user'] = None
     pre_url = request.session.get('url')
     request.session.pop('user')
+    request.session['login_stat']='1'
     return redirect(pre_url)
