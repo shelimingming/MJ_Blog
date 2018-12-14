@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from blog1.views import articles, albums, home, article, comments, goToRegisterPage, register, login, logout
+from blog1.views import articles, albums, home, article, comments, goToRegisterPage, register, login, logout,loginClose
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,6 +33,10 @@ urlpatterns = [
     url('^register$', register, name='register'),
     url('^login$', login, name='login'),
     url('^logout$', logout, name='logout'),
+    url('^loginClose$', loginClose, name='loginClose'),
+
+
+
     # 二级子页面配置
     url('^articles/article$', article, name='article'),
 

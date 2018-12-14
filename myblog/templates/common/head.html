@@ -54,7 +54,6 @@
 </header>
 
 <div class="container">
-    <p id="login_stat" >{{ request.session.login_stat }}</p>
     <div id="left-nav" style="width: 20%; float: left;">
 
         <div class="navbar-brand" style="color:#2b669a;">个人信息</div>
@@ -92,7 +91,7 @@
     <div name="div3" id="div3" hidden="true"
          style="width:25%;position: absolute;z-index: 999;background-color: #c9def0 ;left:37%">
 
-        <a style="float: right;font-size:x-large;margin-right: 8px;margin-top: 8px" id="close" class="close">×</a>
+        <a href="loginClose"  style="float: right;font-size:x-large;margin-right: 8px;margin-top: 8px" id="close" class="close">×</a>
         {#        <div class="container" style="border:3px #9acfea solid ;">#}
         <br>
         <div class="container" style="width: 80%">
@@ -131,21 +130,19 @@
 </div>
 
 </body>
-
-<script src="static/js/bootstrap.min.js"></script>
 <script src="static/js/jquery-3.3.1.min.js"></script>
+<script src="static/js/jquerySession.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+
 <script src="static/js/self.js"></script>
 <script>
 
     function showLogin() {
-        var login_stat = $('#login_stat').text();
-        alert(login_stat);
+        var login_stat = "{{request.session.login_stat}}";
         if ((login_stat == '-1') | (login_stat == '0')) {
-            document.getElementById("login_stat").innerText = '1';
             $('#div3').show(100);
             hidebg.style.display = "block";
             $('#body').attr("style", "overflow: hidden");
-            {#('#login_stat').text('1');#}
         }
     };
     showLogin();
@@ -154,8 +151,9 @@
         $('#div3').hide(100);
         hidebg.style.display = "none";
         $('#body').removeAttr("style");
+{#        {% csrf_token %}#}
+{#        $.post('loginClose');#}
 
-        {#$('#login_stat').text('1');#}
 
     };
 

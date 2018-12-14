@@ -38,7 +38,7 @@
                 <br>
             </div>
         {% endfor %}
-    <p id="user" hidden="true">{{ request.session.user }}</p>
+{#    <p id="user" hidden="true">{{ request.session.user }}</p>#}
     </div>
 
 {% endblock %}
@@ -46,7 +46,7 @@
 {% block js %}
     <script lang="javascript">
         var comment = document.getElementById("commentButton");
-        var user = document.getElementById("user").innerText;
+        var user = "{{ request.session.user }}";
         comment.onclick = function check() {
             if (user){
                 return true;

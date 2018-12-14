@@ -16,16 +16,15 @@ $(document).ready(function () {
     var login = document.getElementById("login");
 
     var hidebg = document.getElementById("hidebg");
+    if (login) {
+        login.onclick = function show() {
 
-    login.onclick = function show() {
+            $('#div3').show(100);
+            hidebg.style.display = "block";
+            $('#body').attr("style", "overflow: hidden");
 
-        $('#div3').show(100);
-        hidebg.style.display = "block";
-        $('#body').attr("style", "overflow: hidden");
-
+        }
     }
-
-
 
 
     //声明需要用到的变量

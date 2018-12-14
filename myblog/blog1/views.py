@@ -145,3 +145,9 @@ def logout(request):
     request.session.pop('user')
     request.session['login_stat']='1'
     return redirect(pre_url)
+
+
+def loginClose(request):
+    pre_url = request.session.get('url')
+    request.session['login_stat'] = '1'
+    return redirect(pre_url)
