@@ -32,7 +32,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<BlogDO> list(Map<String, Object> map) {
-        return null;
+        BlogDOExample example = new BlogDOExample();
+        List<BlogDO> blogDOList = blogDOMapper.selectByExample(example);
+        return blogDOList;
     }
 
     @Override
