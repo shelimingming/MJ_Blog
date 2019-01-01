@@ -4,6 +4,8 @@ import com.myway.rbac.common.utils.PageUtils;
 import com.myway.rbac.common.utils.Query;
 import com.myway.rbac.domain.UserDO;
 import com.myway.rbac.service.UserService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,15 +21,19 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/get")
-    public UserDO get(Integer id) {
+    //使用swagger展示rest api
+    //http://localhost:8003/swagger-ui.html
+    @ApiOperation(value = "根据用户id查询用户", notes = "根据用户id查询用户")
+    @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "Interger")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public UserDO get(@PathVariable Integer id) {
         UserDO user = userService.get(id);
         return user;
     }
 
     @RequestMapping("/login")
-    public UserDO get(String username,String password) {
-        UserDO user = userService.login(username,password);
+    public UserDO get(String username, String password) {
+        UserDO user = userService.login(username, password);
         return user;
     }
 
