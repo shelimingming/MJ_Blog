@@ -57,11 +57,19 @@ public class UserServiceImpl implements UserService {
             return null;
         }
 
+        //需要支持用户名、手机号、邮箱登录
         UserDOExample example = new UserDOExample();
-        example.createCriteria().andAcctEqualTo(acct);
+        UserDOExample.Criteria criteria1 = example.createCriteria().andAcctEqualTo(acct);
+        UserDOExample.Criteria criteria2 = example.createCriteria().andMobileEqualTo(acct);
+        UserDOExample.Criteria criteria3 = example.createCriteria().andEmailEqualTo(acct);
+
+        example.or(criteria1);
+        example.or(criteria2);
+        example.or(criteria3);
+
         List<UserDO> userDOList = userDOMapper.selectByExample(example);
 
-        if (userDOList != null) {
+        if (!CollectionUtils.isEmpty(userDOList)) {
             UserDO user = userDOList.get(0);
             if (password.equals(user.getPassword())) {
                 return user;

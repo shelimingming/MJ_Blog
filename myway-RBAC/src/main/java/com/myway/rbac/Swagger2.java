@@ -26,10 +26,10 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Spring Boot中使用Swagger2构建RESTful APIs")
-                .description("原文地址链接：http://blog.didispace.com/springbootswagger2/")
-                .termsOfServiceUrl("http://blog.didispace.com/")
-                .contact("@我没有三颗心脏")
+                .title("RBAC模块接口文档")
+                .description("负责用户、角色、权限三者之间的管理模块")
+                .termsOfServiceUrl("http://119.3.67.42:8000/")
+                .contact("magicccc")
                 .version("1.0")
                 .build();
     }
